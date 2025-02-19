@@ -30,7 +30,7 @@ jobs:
         run: docker login -u ${{ secrets.EMAIL }} -p ${{ secrets.PASSWORD }} exo.container-registry.com
  
       - name: Tag image
-        run: docker tag todo-app exo.container-registry.com/c213-emf/todo-app:ET
+        run: docker tag todo-app exo.container-registry.com/c213-emf/todo-app:LW
  
       - name: Push image
-        run: docker push exo.container-registry.com/c213-emf/todo-app:ET
+        run: docker push exo.container-registry.com/c213-emf/todo-app:LW
