@@ -1,0 +1,36 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+ 
+name: ci-backend
+ 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/backend/**"
+ 
+env:
+  REGISTRY_NAME: "exo.container-registry.com"
+jobs:
+  build_connect_push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+ 
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.20"
+ 
+      - name: Go to backend folder and build the image
+        run: cd ./src/backend && docker build -t todo-app .
+ 
+      - name: Connect to registry
+        run: docker login -u ${{ secrets.EMAIL }} -p ${{ secrets.PASSWORD }} exo.container-registry.com
+ 
+      - name: Tag image
+        run: docker tag todo-app exo.container-registry.com/c213-emf/todo-app:ET
+ 
+      - name: Push image
+        run: docker push exo.container-registry.com/c213-emf/todo-app:ET
