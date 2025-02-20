@@ -22,7 +22,6 @@ app.get("/*", (req, res) => {
 app.use((err, req, res, next) => {
     res.status(422).send({ error: err._message });
 });
-// miam
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
