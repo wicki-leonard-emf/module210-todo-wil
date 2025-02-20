@@ -15,9 +15,11 @@ env:
 jobs:
   build_connect_push:
     runs-on: ubuntu-latest
+
     steps:
+      # Clone le repository
       - uses: actions/checkout@v4
- 
+      # Set up Go
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
